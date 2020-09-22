@@ -1,0 +1,127 @@
+VERSION 5.00
+Begin VB.PropertyPage TextStyle 
+   Caption         =   "TextStyle"
+   ClientHeight    =   6600
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6060
+   BeginProperty Font 
+      Name            =   "Tahoma"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   6600
+   ScaleWidth      =   6060
+   Begin VB.Frame Frame1 
+      Caption         =   "Alignment"
+      Height          =   2265
+      Left            =   315
+      TabIndex        =   5
+      Top             =   1800
+      Width           =   5610
+      Begin VB.OptionButton Option1 
+         Caption         =   "Left"
+         Height          =   195
+         Index           =   0
+         Left            =   300
+         TabIndex        =   9
+         Top             =   375
+         Width           =   1200
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Icon Bottom"
+         Height          =   195
+         Index           =   3
+         Left            =   300
+         TabIndex        =   8
+         Top             =   1815
+         Width           =   1200
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Right"
+         Height          =   195
+         Index           =   2
+         Left            =   300
+         TabIndex        =   7
+         Top             =   1335
+         Width           =   1200
+      End
+      Begin VB.OptionButton Option1 
+         Caption         =   "Center"
+         Height          =   195
+         Index           =   1
+         Left            =   300
+         TabIndex        =   6
+         Top             =   855
+         Width           =   1200
+      End
+   End
+   Begin VB.CheckBox Check1 
+      Caption         =   "Multi Line"
+      Height          =   240
+      Left            =   1230
+      TabIndex        =   3
+      Top             =   900
+      Width           =   1155
+   End
+   Begin VB.TextBox txCaption 
+      Height          =   285
+      Left            =   1230
+      TabIndex        =   2
+      Top             =   555
+      Width           =   4680
+   End
+   Begin VB.Label Label2 
+      BackColor       =   &H80000018&
+      Caption         =   "Info: If you want to use Multi Line,  check it then use pipe '|' as your vbCrLf "
+      ForeColor       =   &H000000FF&
+      Height          =   420
+      Left            =   1230
+      TabIndex        =   4
+      Top             =   1215
+      Width           =   4680
+   End
+   Begin VB.Label Label1 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Customize Caption"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   345
+      Index           =   1
+      Left            =   120
+      TabIndex        =   1
+      Top             =   45
+      Width           =   2295
+   End
+   Begin VB.Label Label1 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Caption:"
+      Height          =   195
+      Index           =   0
+      Left            =   330
+      TabIndex        =   0
+      Top             =   585
+      Width           =   615
+   End
+End
+Attribute VB_Name = "TextStyle"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Option Explicit
+
