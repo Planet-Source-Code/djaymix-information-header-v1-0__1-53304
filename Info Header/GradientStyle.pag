@@ -1,0 +1,173 @@
+VERSION 5.00
+Object = "{F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0"; "comdlg32.ocx"
+Begin VB.PropertyPage GradientStyle 
+   Caption         =   "Gradient Style"
+   ClientHeight    =   3495
+   ClientLeft      =   0
+   ClientTop       =   0
+   ClientWidth     =   6135
+   BeginProperty Font 
+      Name            =   "Tahoma"
+      Size            =   8.25
+      Charset         =   0
+      Weight          =   400
+      Underline       =   0   'False
+      Italic          =   0   'False
+      Strikethrough   =   0   'False
+   EndProperty
+   PaletteMode     =   0  'Halftone
+   ScaleHeight     =   3495
+   ScaleWidth      =   6135
+   Begin VB.ComboBox dd_GradStyl 
+      Height          =   315
+      ItemData        =   "GradientStyle.pgx":0000
+      Left            =   2760
+      List            =   "GradientStyle.pgx":000A
+      Style           =   2  'Dropdown List
+      TabIndex        =   7
+      Top             =   2130
+      Width           =   1635
+   End
+   Begin VB.HScrollBar mf_Scrl 
+      Height          =   255
+      Left            =   2760
+      Max             =   100
+      Min             =   1
+      TabIndex        =   5
+      Top             =   1740
+      Value           =   1
+      Width           =   2625
+   End
+   Begin VB.PictureBox picGradColr 
+      Height          =   1095
+      Index           =   1
+      Left            =   5565
+      ScaleHeight     =   1035
+      ScaleWidth      =   330
+      TabIndex        =   3
+      Top             =   540
+      Width           =   390
+   End
+   Begin VB.PictureBox picGradColr 
+      Height          =   1095
+      Index           =   0
+      Left            =   180
+      ScaleHeight     =   1035
+      ScaleWidth      =   330
+      TabIndex        =   2
+      Top             =   540
+      Width           =   390
+   End
+   Begin MSComDlg.CommonDialog CDlg 
+      Left            =   5040
+      Top             =   -165
+      _ExtentX        =   847
+      _ExtentY        =   847
+      _Version        =   393216
+   End
+   Begin VB.PictureBox picGradPrev 
+      BorderStyle     =   0  'None
+      Height          =   1095
+      Left            =   780
+      ScaleHeight     =   1095
+      ScaleWidth      =   4605
+      TabIndex        =   0
+      Top             =   540
+      Width           =   4605
+   End
+   Begin VB.Label Label2 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Gradient Style"
+      Height          =   195
+      Index           =   1
+      Left            =   1635
+      TabIndex        =   6
+      Top             =   2190
+      Width           =   1020
+   End
+   Begin VB.Label Label2 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Scroll for Gradient Max Fill"
+      Height          =   195
+      Index           =   0
+      Left            =   795
+      TabIndex        =   4
+      Top             =   1770
+      Width           =   1860
+   End
+   Begin VB.Label Label1 
+      AutoSize        =   -1  'True
+      BackStyle       =   0  'Transparent
+      Caption         =   "Customize Gradient Style"
+      BeginProperty Font 
+         Name            =   "Tahoma"
+         Size            =   14.25
+         Charset         =   0
+         Weight          =   400
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      Height          =   345
+      Left            =   120
+      TabIndex        =   1
+      Top             =   45
+      Width           =   3120
+   End
+End
+Attribute VB_Name = "GradientStyle"
+Attribute VB_GlobalNameSpace = False
+Attribute VB_Creatable = True
+Attribute VB_PredeclaredId = False
+Attribute VB_Exposed = True
+Option Explicit
+
+Private Sub PropertyPage_ApplyChanges()
+    SelectedControls(0).LeftColor = picGradColr(0).BackColor
+    SelectedControls(0).RightColor = picGradColr(1).BackColor
+    
+    SelectedControls(0).MaxFill = mf_Scrl.Value
+    SelectedControls(0).GradientStyle = dd_GradStyl.ListIndex
+End Sub
+
+Private Sub dd_GradStyl_Click()
+     Changed = True
+     
+     Call reDraw
+End Sub
+
+Private Sub mf_Scrl_Scroll()
+     Changed = True
+     
+     Call reDraw
+End Sub
+
+Private Sub picGradColr_Click(Index As Integer)
+     Changed = True
+
+     CDlg.ShowColor
+     
+     picGradColr(Index).BackColor = CDlg.Color
+     
+     Call reDraw
+End Sub
+
+Private Sub PropertyPage_SelectionChanged()
+     picGradColr(0).BackColor = SelectedControls(0).LeftColor
+     picGradColr(1).BackColor = SelectedControls(0).RightColor
+              
+     mf_Scrl.Value = SelectedControls(0).MaxFill
+     dd_GradStyl.ListIndex = SelectedControls(0).GradientStyle
+     
+     Call reDraw
+End Sub
+
+Sub reDraw()
+     picGradPrev.Cls
+     
+     Gradient picGradPrev, _
+              picGradColr(0).BackColor, picGradColr(1).BackColor, _
+              mf_Scrl.Value, dd_GradStyl.ListIndex
+End Sub
